@@ -9,6 +9,7 @@ import styles from './style.scss';
 import { Tabs, Button, Checkbox, Row, Col, Form } from 'antd';
 import LoginAccount from './components/loginAccount';
 import LoginMobile from './components/loginMobile';
+import tools from '../../utils/tools';
 
 const { TabPane } = Tabs;
 const FormItem = Form.Item;
@@ -20,6 +21,7 @@ class Login extends React.Component {
       loginMode: '0', // 登录模式 0-账号登录 1-手机号登录
       autoLogin: true,
     };
+    tools.setCookie('abc', 133, { exdays: 2 })
   }
 
   handleLogin = () => {
@@ -30,9 +32,11 @@ class Login extends React.Component {
         const params = loginMode === '0' ? {
           account: values.account,
           password: this.encryption(values.password),
-        } : {};
-        console.log(this.props)
-        dispatch({ type: 'LOGIN/login', ...params });
+        } : {
+          mobile: values.mobile,
+          captcha: values.msgCode,
+        };
+        dispatch({ type: 'LOGIN/login', params });
       }
     });
   }
@@ -53,12 +57,24 @@ class Login extends React.Component {
           <h1 className={styles['tit']}>后台管理系统</h1>
 
           <div className={styles['login-tab']}>
-            <Tabs defaultActiveKey={mode} animated={false}>
+            <Tabs
+              defaultActiveKey={mode}
+              animated={false}
+              onChange={(key) => {
+                this.setState({ loginMode: key });
+              }}
+            >
               <TabPane tab="账号密码登录" key="0">
                 <LoginAccount form={this.props.form} />
               </TabPane>
               <TabPane tab="手机号登录" key="1">
-                <LoginMobile form={this.props.form} />
+                <LoginMobile
+                  form={this.props.form}
+                  sendMsg={(mobile) => {
+                    const { dispatch } = this.props;
+                    dispatch({ type: 'LOGIN/sendMsg', mobile });
+                  }}
+                />
               </TabPane>
             </Tabs>
 
@@ -71,6 +87,8 @@ class Login extends React.Component {
                       this.setState({
                         autoLogin: !this.state.autoLogin,
                       });
+                      // 自动登录状态存储到cookie中
+                      
                     }}
                   >自动登录</Checkbox>
                 </FormItem>

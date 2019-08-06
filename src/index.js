@@ -15,7 +15,6 @@ Object.keys(models).forEach((key) => {
   const model = models[key];
 
   if (model) {
-    console.log(model)
     app.model(model);
   }
 });
