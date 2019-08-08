@@ -2,14 +2,12 @@
  * 登录页
  */
 import React from 'react';
-import { Route } from 'dva/router';
 import { connect } from 'dva';
-import MD5 from 'md5.js';
 import styles from './style.scss';
-import { Tabs, Button, Checkbox, Row, Col, Form } from 'antd';
+import { Tabs, Button, Checkbox, Row, Col, Form, Spin } from 'antd';
+import { Link } from 'dva/router';
 import LoginAccount from './components/loginAccount';
 import LoginMobile from './components/loginMobile';
-import tools from '../../utils/tools';
 
 const { TabPane } = Tabs;
 const FormItem = Form.Item;
@@ -20,8 +18,8 @@ class Login extends React.Component {
     this.state = {
       loginMode: '0', // 登录模式 0-账号登录 1-手机号登录
       autoLogin: true,
+      isLoading: false,
     };
-    tools.setCookie('abc', 133, { exdays: 2 })
   }
 
   handleLogin = () => {
@@ -31,25 +29,19 @@ class Login extends React.Component {
       if (!err) {
         const params = loginMode === '0' ? {
           account: values.account,
-          password: this.encryption(values.password),
+          password: values.password,
         } : {
           mobile: values.mobile,
           captcha: values.msgCode,
         };
+        this.setState();
         dispatch({ type: 'LOGIN/login', params });
       }
     });
   }
 
-  // 密码加密
-  encryption = (str) => {
-    const md5 = (str) => new MD5().update(str).digest('base64');
-
-    return md5(md5(str).substr(2, 7) + md5(str));
-  }
-
   render() {
-    const { loginMode: mode, autoLogin } = this.state;
+    const { loginMode: mode, autoLogin, isLoading } = this.state;
 
     return (
       <div className={styles['login-page']}>
@@ -94,7 +86,7 @@ class Login extends React.Component {
                 </FormItem>
               </Col>
               <Col span={12}>
-                <FormItem style={{ float: 'right' }}><a>忘记密码</a></FormItem>
+                <FormItem style={{ float: 'right' }}><Link to="/resetpass">忘记密码</Link></FormItem>
               </Col>
             </Row>
             <FormItem>

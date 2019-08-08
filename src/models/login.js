@@ -1,6 +1,14 @@
 import request from '../utils/request';
 import { routerRedux } from 'dva/router';
 import { message } from 'antd';
+import MD5 from 'md5.js';
+
+// 密码加密
+const encryption = (str) => {
+  const md5 = (str) => new MD5().update(str).digest('base64');
+
+  return md5(md5(str).substr(2, 7) + md5(str));
+}
 
 export default {
   namespace: 'LOGIN',
@@ -18,16 +26,39 @@ export default {
 
       const options = {
         method: 'POST',
-        body: params,
+        body: {
+          account: params.account,
+          password: encryption(params.password),
+        },
       };
+      yield put({ type: 'GLOBAL/loading', loading: true });
       const result = yield call(request, 'http://localhost:3002/user/login', options);
       
       if (result) {
         // 登录成功
-        message.success('登录成功', 1);
+        yield message.success('登录成功', 1);
         // 存储用户信息
         yield put({ type: 'getUser' });
         yield put(routerRedux.push('/'));
+        yield put({ type: 'GLOBAL/loading', loading: false });
+      }
+    },
+
+    // 修改密码
+    *reset(action, { call, put}) {
+      const { account, password } = action;
+      const options = {
+        method: 'POST',
+        body: {
+          account,
+          password: encryption(password),
+        }
+      };
+      const result = yield call(request, 'http://localhost:3002/user/resetpass', options);
+
+      if (result) {
+        yield message.success('修改成功', 2);
+        yield put(routerRedux.replace('/login'));
       }
     },
 
@@ -49,4 +80,8 @@ export default {
       return { ...state, loginStatus: true, userInfo: data };
     }
   },
+
+  subscriptions: {
+    
+  }
 };
