@@ -1,6 +1,7 @@
 .header {
   background-color: #fff;
   position: relative;
+  padding-right: 0;
 }
 .collapse {
   position: absolute;
@@ -9,4 +10,29 @@
   cursor: pointer;
   font-size: 20px;
   transform: translateY(-50%);
+}
+.pointer {
+  cursor: pointer;
+  padding: 0 12px;
+  &:hover {
+    background-color: rgba(0, 0, 0, .025);
+  }
+}
+.user-info {
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+}
+.user-name {
+  margin-left: 5px;
+}
+.header-control {
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  &::before {
+    content: '';
+    display: block;
+    flex: 1;
+  }
 }
