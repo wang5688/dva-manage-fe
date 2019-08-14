@@ -1,0 +1,12 @@
+.header {
+  background-color: #fff;
+  position: relative;
+}
+.collapse {
+  position: absolute;
+  left: 24px;
+  top: 50%;
+  cursor: pointer;
+  font-size: 20px;
+  transform: translateY(-50%);
+}

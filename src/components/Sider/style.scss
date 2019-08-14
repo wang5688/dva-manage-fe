@@ -1,0 +1,17 @@
+.title {
+  font-size: 20px;
+  color: #fff;
+  padding: 16px 0 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &::before {
+    content: '';
+    display: block;
+    width: 26px;
+    height: 26px;
+    background-color: #ccc;
+    transform: rotate(45deg);
+    margin-right: 15px;
+  }
+}

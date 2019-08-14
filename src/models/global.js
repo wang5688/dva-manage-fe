@@ -19,7 +19,7 @@ export default {
     setUp({ dispatch, history }) {
       return history.listen((location) => {
         const { pathname } = location;
-    
+
         if (/login|resetpass/.test(pathname) && tools.getCookie('lg') === '1') {
           dispatch(routerRedux.replace('/'));
         }

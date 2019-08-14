@@ -33,7 +33,7 @@ export default {
       };
       yield put({ type: 'GLOBAL/loading', loading: true });
       const result = yield call(request, 'http://localhost:3002/user/login', options);
-      
+
       if (result) {
         // 登录成功
         yield message.success('登录成功', 1);
@@ -82,6 +82,6 @@ export default {
   },
 
   subscriptions: {
-    
+
   }
 };
