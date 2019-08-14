@@ -7,5 +7,6 @@
 /dist
 
 # misc
+.vscode
 .DS_Store
 npm-debug.log*
