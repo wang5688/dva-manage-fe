@@ -5,6 +5,8 @@ import React from 'react';
 import { Menu } from 'antd';
 import styles from './style/index.scss';
 import Info from '../../components/Account/Info';
+import Security from '../../components/Account/Security';
+import Notice from '../../components/Account/Notice';
 
 class Account extends React.Component {
   constructor(props) {
@@ -28,13 +30,19 @@ class Account extends React.Component {
         case '1':
           pannel = <Info />;
           break;
+        case '2':
+          pannel = <Security />;
+          break;
+        case '3':
+          pannel = <Notice />;
+          break;
         default:
           pannel = null;
       }
 
       return pannel;
     };
-    
+
     return (
       <div className={styles['account-container']}>
         <div className={styles['left']}>
@@ -50,9 +58,6 @@ class Account extends React.Component {
               安全设置
             </Menu.Item>
             <Menu.Item key="3">
-              基本信息
-            </Menu.Item>
-            <Menu.Item key="4">
               通知设置
             </Menu.Item>
           </Menu>

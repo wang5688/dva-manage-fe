@@ -13,7 +13,7 @@ class Info extends React.Component {
     this.dispatch = this.props.dispatch;
 
     this.init();
-    
+
   }
 
   init() {
@@ -44,7 +44,7 @@ class Info extends React.Component {
 
     let limitType = true;
     let limitSize = true;
-    
+
     if (ACCEPT_TYPE.indexOf(type) < 0) {
       message.error('仅支持jpeg、png或gif格式的文件');
       limitType = false;
@@ -144,7 +144,7 @@ class Info extends React.Component {
 function getCity(value) {
   if (!value) return [];
   const arr = value.split(',');
-  
+
   return arr.map((t) => t !== undefined && t);
 }
 
