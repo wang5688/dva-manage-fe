@@ -1,14 +1,15 @@
 import React from 'react';
-import DashBoard from '../../components/DashBoard';
+import { Link } from 'dva/router';
 
 class IndexPage extends React.Component {
 
   render() {
 
     return (
-      <DashBoard>
-        231321
-      </DashBoard>
+      <div>
+        <p>index</p>
+        <Link to="/page/account">跳转</Link>
+      </div>
     );
   }
 }

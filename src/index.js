@@ -5,7 +5,7 @@ import './style/init.scss';
 
 // 1. Initialize
 const app = dva({
-  history: require('history').createBrowserHistory(),
+  history: require('history').createHashHistory(),
 });
 
 // 2. Plugins
