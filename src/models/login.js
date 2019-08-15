@@ -64,7 +64,7 @@ export default {
 
     // 获取用户信息
     *getUser(action, { call, put }) {
-      const result = yield call(request, 'http://localhost:3002/user/getUserInfo', { method: 'POST', credentials: 'include' });
+      const result = yield call(request, 'http://localhost:3002/user/getUserInfo', { method: 'POST' });
       if (result) {
         yield put({ type: 'saveUser', data: result });
       }

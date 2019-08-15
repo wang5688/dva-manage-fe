@@ -12,7 +12,7 @@ export default class LeftSide extends React.Component {
     console.log(collapse)
 
     return (
-      <Sider collapsible collapsed={collapse}>
+      <Sider collapsed={collapse}>
         <h1 className={styles['title']}>{ !collapse && '后台管理系统'}</h1>
         <Menu
           defaultSelectedKeys={['1']}
