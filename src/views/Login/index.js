@@ -4,7 +4,7 @@
 import React from 'react';
 import { connect } from 'dva';
 import styles from './style.scss';
-import { Tabs, Button, Checkbox, Row, Col, Form, Spin } from 'antd';
+import { Tabs, Button, Checkbox, Row, Col, Form } from 'antd';
 import { Link } from 'dva/router';
 import LoginAccount from './components/loginAccount';
 import LoginMobile from './components/loginMobile';
@@ -41,7 +41,7 @@ class Login extends React.Component {
   }
 
   render() {
-    const { loginMode: mode, autoLogin, isLoading } = this.state;
+    const { loginMode: mode, autoLogin } = this.state;
 
     return (
       <div className={styles['login-page']}>

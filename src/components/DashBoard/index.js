@@ -1,5 +1,4 @@
 import React from 'react';
-import { withRouter } from 'dva/router';
 import { Layout } from 'antd';
 import Sider from '../../components/Sider';
 import Header from '../../components/Header';

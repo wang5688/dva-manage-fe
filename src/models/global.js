@@ -6,13 +6,11 @@ export default {
   namespace: 'GLOBAL',
 
   state: {
-    loading: false,
+    
   },
 
   reducers: {
-    loading(state, { loading }) {
-      return {...state, loading};
-    }
+    
   },
 
   subscriptions: {

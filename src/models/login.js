@@ -31,7 +31,6 @@ export default {
           password: encryption(params.password),
         },
       };
-      yield put({ type: 'GLOBAL/loading', loading: true });
       const result = yield call(request, 'http://localhost:3002/user/login', options);
 
       if (result) {
@@ -68,10 +67,6 @@ export default {
       if (result) {
         yield put({ type: 'saveUser', data: result });
       }
-    },
-
-    *sendMsg(action, { call }) {
-      console.log(action)
     }
   },
 

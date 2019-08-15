@@ -7,7 +7,8 @@ import styles from './style.scss';
 
 class App extends React.Component {
 
-  componentWillMount() {
+  constructor(props) {
+    super(props);
     if (!this.props.loginStatus && tools.getCookie('lg') === '1') {
       this.props.dispatch({ type: 'LOGIN/getUser' });
     }
@@ -31,7 +32,7 @@ class App extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  loading: state['GLOBAL'].loading,
+  loading: state.loading.global,
   loginStatus: state['LOGIN'].loginStatus,
   userInfo: state['LOGIN'].userInfo,
 });

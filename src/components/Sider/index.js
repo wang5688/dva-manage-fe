@@ -1,15 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Layout, Menu, Button, Icon } from 'antd';
+import { Layout, Menu, Icon } from 'antd';
 import styles from './style.scss';
 const { Sider } = Layout;
-const { SubMenu } = Menu;
 
 export default class LeftSide extends React.Component {
 
   render() {
     const { collapse } = this.props;
-    console.log(collapse)
 
     return (
       <Sider collapsed={collapse}>
@@ -28,3 +26,7 @@ export default class LeftSide extends React.Component {
     );
   }
 }
+
+LeftSide.propTypes = {
+  collapse: PropTypes.bool,
+};

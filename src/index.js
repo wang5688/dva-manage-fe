@@ -1,4 +1,5 @@
 import dva from 'dva';
+import createLoading from 'dva-loading';
 import models from './models/index';
 import './style/init.scss';
 
@@ -8,7 +9,7 @@ const app = dva({
 });
 
 // 2. Plugins
-// app.use({});
+app.use(createLoading());
 
 // 3. Model
 Object.keys(models).forEach((key) => {
