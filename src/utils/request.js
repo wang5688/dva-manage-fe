@@ -23,7 +23,7 @@ function checkStatus(response) {
  * @param  {object} [options] The options we want to pass to "fetch"
  * @return {object}           An object containing either "data" or "err"
  */
-export default function request(url, options) {
+export default function request(url, options = {}) {
   const { method = 'GET', body = {} } = options;
   const opt = { method, credentials: options.credentials || 'include' };
   const formData = new FormData();
@@ -45,5 +45,7 @@ export default function request(url, options) {
       message.destroy();
       message.error(msg, 2);
     })
-    .catch(err => ({ err }));
+    .catch(err => {
+      throw new Error(err);
+    });
 }

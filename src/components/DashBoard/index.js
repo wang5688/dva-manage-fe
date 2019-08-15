@@ -28,8 +28,10 @@ class DashBoard extends React.Component {
         <Sider collapse={isCollapse}></Sider>
         <Layout>
           <Header collapse={isCollapse} onCollapse={this.onCollapse}></Header>
-          <Content>
-            {this.props.children}
+          <Content style={{ display: 'flex' }}>
+            <div className={styles['content']}>
+              {this.props.children}
+            </div>
           </Content>
         </Layout>
       </Layout>
